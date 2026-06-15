@@ -1,0 +1,58 @@
+---
+import { TrendingUp, ShieldAlert, BadgeDollarSign } from '@lucide/astro';
+---
+
+<section id="roi" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+  <!-- Background Decor -->
+  <div class="absolute top-0 right-0 p-32 opacity-10">
+    <svg class="w-full h-full text-white" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,81.3,-46.3C90.8,-33.5,96.8,-18,96.4,-2.8C96,12.5,89.1,27.5,80.1,40.8C71.1,54.1,60,65.6,46.7,73.4C33.4,81.1,18.1,85.1,2.8,80.5C-12.5,75.9,-27.5,62.7,-40.4,52.2C-53.3,41.7,-64.1,33.9,-72.6,22.7C-81.1,11.5,-87.3,-3,-86.3,-17C-85.3,-31,-77.1,-44.5,-65.8,-53.8C-54.5,-63.1,-40.1,-68.2,-26.8,-72.3C-13.5,-76.4,-1.2,-79.5,12.2,-79.8C25.6,-80.1,30.6,-83.6,44.7,-76.4Z" transform="translate(100 100)" />
+    </svg>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Una prevención paga años de servicio</h2>
+      <p class="text-xl text-slate-300">
+        El impacto económico de regar con agua desbalanceada puede costar el 30% de tu cosecha de arándanos. Nuestro sistema se paga solo.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700 text-center">
+        <div class="flex justify-center mb-6">
+          <ShieldAlert class="h-12 w-12 text-emerald-400" />
+        </div>
+        <div class="text-5xl font-bold text-white mb-2">100%</div>
+        <p class="text-lg font-medium text-emerald-400 mb-3">Evita pérdidas</p>
+        <p class="text-slate-400 text-sm">
+          Por desregulación de pH o picos de conductividad eléctrica en el riego.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700 text-center">
+        <div class="flex justify-center mb-6">
+          <TrendingUp class="h-12 w-12 text-blue-400" />
+        </div>
+        <div class="text-5xl font-bold text-white mb-2">+15%</div>
+        <p class="text-lg font-medium text-blue-400 mb-3">Aumento en calibre</p>
+        <p class="text-slate-400 text-sm">
+          Al mantener la nutrición en niveles óptimos durante toda la temporada.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700 text-center">
+        <div class="flex justify-center mb-6">
+          <BadgeDollarSign class="h-12 w-12 text-purple-400" />
+        </div>
+        <div class="text-5xl font-bold text-white mb-2">-25%</div>
+        <p class="text-lg font-medium text-purple-400 mb-3">Ahorro en químicos</p>
+        <p class="text-slate-400 text-sm">
+          Dosis exactas de ácido y fertilizantes al conocer el estado base del agua.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>

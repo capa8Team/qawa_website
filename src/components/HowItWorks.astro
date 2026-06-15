@@ -1,0 +1,53 @@
+---
+import { Activity, Radio, BellRing } from '@lucide/astro';
+---
+
+<section id="solucion" class="py-24 bg-white relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">¿Cómo funciona?</h2>
+      <p class="text-lg text-slate-600">
+        Un sistema plug-and-play diseñado para el campo. Sin instalaciones complejas ni mantenimientos costosos.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 relative">
+      <!-- Connecting line for desktop -->
+      <div class="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-slate-100 -z-10"></div>
+
+      <!-- Step 1 -->
+      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center group">
+        <div class="w-20 h-20 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+          <Activity class="h-10 w-10 text-blue-600" />
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">1. Mide</h3>
+        <p class="text-slate-600 leading-relaxed">
+          La boya inteligente flota en tu embalse y recolecta datos críticos (pH, CE, T°) 24/7 con sensores de precisión industrial.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center group">
+        <div class="w-20 h-20 mx-auto bg-emerald-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+          <Radio class="h-10 w-10 text-emerald-600" />
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">2. Envía</h3>
+        <p class="text-slate-600 leading-relaxed">
+          Transmite la información en tiempo real a la nube mediante conexión celular o LoRaWAN, asegurando cobertura incluso en zonas remotas.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center group">
+        <div class="w-20 h-20 mx-auto bg-purple-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+          <BellRing class="h-10 w-10 text-purple-600" />
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">3. Alerta</h3>
+        <p class="text-slate-600 leading-relaxed">
+          Recibe notificaciones inmediatas en tu teléfono (WhatsApp/Telegram) si los parámetros salen del rango óptimo para tus cultivos.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+---
+import { Droplet, Menu, X } from '@lucide/astro';
+---
+
+<nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 cursor-pointer">
+        <div class="bg-blue-600 p-2 rounded-lg">
+          <Droplet class="text-white h-6 w-6" />
+        </div>
+        <span class="text-xl font-bold text-slate-900 tracking-tight">AquaSense<span class="text-emerald-500">IoT</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#solucion" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Solución</a>
+        <a href="#roi" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">ROI</a>
+        <a href="#escalabilidad" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Escalabilidad</a>
+        <a href="#precios" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Precios</a>
+      </div>
+
+      <!-- Buttons -->
+      <div class="hidden md:flex items-center space-x-4">
+        <button class="text-blue-600 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
+          Ver Demo
+        </button>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium shadow-sm transition-all shadow-blue-600/20">
+          Consola Cliente
+        </button>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button id="menu-toggle" class="text-slate-600 hover:text-slate-900 focus:outline-none p-2">
+          <Menu id="menu-icon-open" class="h-6 w-6" />
+          <X id="menu-icon-close" class="h-6 w-6 hidden" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div id="mobile-menu" class="md:hidden bg-white border-b border-slate-200 hidden">
+    <div class="px-4 pt-2 pb-6 space-y-4 shadow-xl">
+      <a href="#solucion" class="block text-slate-600 font-medium py-2">Solución</a>
+      <a href="#roi" class="block text-slate-600 font-medium py-2">ROI</a>
+      <a href="#escalabilidad" class="block text-slate-600 font-medium py-2">Escalabilidad</a>
+      <a href="#precios" class="block text-slate-600 font-medium py-2">Precios</a>
+      <div class="pt-4 flex flex-col gap-3">
+        <button class="text-blue-600 font-medium py-2 border border-blue-600 rounded-lg w-full">Ver Demo</button>
+        <button class="bg-blue-600 text-white font-medium py-2 rounded-lg w-full">Consola Cliente</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+    iconOpen?.classList.toggle('hidden');
+    iconClose?.classList.toggle('hidden');
+  });
+</script>

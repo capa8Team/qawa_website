@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta tecnología / agua - Azules */
+  --color-tech-blue-50: #eff8ff;
+  --color-tech-blue-100: #d9efff;
+  --color-tech-blue-200: #b8e2ff;
+  --color-tech-blue-300: #86ceff;
+  --color-tech-blue-400: #4eb1ff;
+  --color-tech-blue-500: #258fff;
+  --color-tech-blue-600: #0d6fec;
+  --color-tech-blue-700: #0758c2;
+  --color-tech-blue-800: #0a4a97;
+  --color-tech-blue-900: #0e3f76;
+  --color-tech-blue-950: #0a2747;
+
+  /* Paleta agricultura / rentabilidad - Verdes */
+  --color-crop-green-50: #f1fbf3;
+  --color-crop-green-100: #def6e3;
+  --color-crop-green-200: #b9ecc6;
+  --color-crop-green-300: #87da9f;
+  --color-crop-green-400: #50bf76;
+  --color-crop-green-500: #2ca256;
+  --color-crop-green-600: #1d8344;
+  --color-crop-green-700: #186838;
+  --color-crop-green-800: #16542f;
+  --color-crop-green-900: #134529;
+  --color-crop-green-950: #082617;
+}
