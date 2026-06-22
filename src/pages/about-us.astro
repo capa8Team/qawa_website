@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <main>
+    <!-- Hero pequeño coherente con diseño principal -->
+    <section class="relative pt-24 pb-12 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/60 border border-blue-200 text-blue-700 font-medium text-sm mb-4">
+            <span class="h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+            Quiénes somos
+          </span>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-4">Nos apasiona proteger el agua que hace crecer tus cultivos</h1>
+          <p class="text-lg text-slate-600 mb-8">En <strong>[Nombre de la empresa]</strong> combinamos IoT, análisis y agronomía para ofrecer soluciones prácticas de monitoreo y control de la calidad del agua.</p>
+          <div class="flex justify-center gap-4">
+            <a href="/" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold shadow">Volver al inicio</a>
+            <a href="/contact" class="inline-flex items-center gap-2 bg-white border border-slate-200 text-slate-700 px-6 py-3 rounded-xl font-semibold hover:bg-slate-50">Contáctanos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-3 gap-8 items-start">
+          <div class="lg:col-span-2">
+            <div class="prose max-w-none text-slate-700">
+              <h2>Nuestra misión</h2>
+              <p>Ofrecer tecnología accesible y confiable para que agricultores y gestores de recursos hídricos tomen decisiones tempranas y reduzcan riesgos en la producción agrícola.</p>
+
+              <h3>Qué hacemos</h3>
+              <p>Desarrollamos boyas IoT con sensores de pH, conductividad y temperatura, integradas con alertas y dashboards que simplifican el monitoreo diario.</p>
+
+              <h3>Valores</h3>
+              <ul>
+                <li>Orientación a resultados</li>
+                <li>Diseño sencillo y robusto</li>
+                <li>Transparencia en datos</li>
+                <li>Colaboración con usuarios y agrónomos</li>
+              </ul>
+
+              <h3>Equipo</h3>
+              <p>Equipo multidisciplinar con experiencia en hardware, software y ciencia de datos, enfocado en soluciones aplicadas al campo.</p>
+            </div>
+          </div>
+
+          <aside class="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
+            <h4 class="text-slate-900 font-semibold mb-3">Contacto</h4>
+            <p class="text-sm text-slate-600 mb-4">¿Quieres una demo o cotización personalizada?</p>
+            <a href="/#contacto" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-semibold">Escríbenos</a>
+
+            <div class="mt-6 border-t border-slate-100 pt-4 text-sm text-slate-500">
+              <p><strong>Oficina:</strong> [Ciudad, País]</p>
+              <p><strong>Email:</strong> <a href="mailto:info@example.com" class="text-blue-600 hover:underline">info@example.com</a></p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 bg-blue-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-2xl p-8 sm:p-12 bg-gradient-to-r from-blue-50 to-emerald-50 border border-blue-100 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">¿Listo para mejorar el cultivo con datos?</h3>
+              <p class="text-slate-600">Te ayudamos a implementar monitoreo confiable y acción temprana.</p>
+            </div>
+            <div>
+              <a href="/#contacto" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold">Solicitar demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
