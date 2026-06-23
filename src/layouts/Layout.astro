@@ -23,8 +23,48 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <script is:inline>
+      (function () {
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+
+        function isHomePage() {
+          var path = window.location.pathname.replace(/\/$/, '') || '/';
+          return path === '/' || path === '' || path.endsWith('/index.html');
+        }
+
+        function resetHomeToTop() {
+          if (!isHomePage()) return;
+          if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }
+
+        function shouldResetHomeOnLoad() {
+          if (!isHomePage()) return false;
+          var nav = performance.getEntriesByType('navigation')[0];
+          return !nav || nav.type === 'reload';
+        }
+
+        if (shouldResetHomeOnLoad()) {
+          resetHomeToTop();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+          if (shouldResetHomeOnLoad()) resetHomeToTop();
+        });
+
+        window.addEventListener('pageshow', function (event) {
+          if (event.persisted && isHomePage()) resetHomeToTop();
+        });
+      })();
+    </script>
   </head>
-  <body class="min-h-screen flex flex-col bg-white font-sans selection:bg-blue-100 selection:text-blue-900 scroll-smooth">
+  <body class="min-h-screen flex flex-col bg-white font-sans selection:bg-blue-100 selection:text-blue-900">
     <Navbar />
     <div class="flex-1">
       <slot />

@@ -11,7 +11,8 @@ import hero_main_image from "../assets/hero/hero_main_image.webp";
 ---
 
 <section
-  class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50"
+  id="top"
+  class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50 scroll-mt-0"
 >
   <!-- Background Decor -->
   <div
@@ -56,12 +57,13 @@ import hero_main_image from "../assets/hero/hero_main_image.webp";
             Cotizar ahora
             <ArrowRight class="h-5 w-5" />
           </a>
-          <button
+          <a
+            href="/demo/"
             class="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-4 rounded-xl font-semibold shadow-sm transition-all hover:-translate-y-0.5"
           >
             <PlayCircle class="h-5 w-5 text-blue-600" />
             Ver Demo
-          </button>
+          </a>
         </div>
 
         <div class="mt-10 flex items-center gap-6 text-sm text-slate-500"></div>

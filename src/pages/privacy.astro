@@ -1,83 +1,50 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import LegalLayout from '../layouts/LegalLayout.astro';
 ---
 
-<Layout>
-  <main class="container">
-    <section class="pt-24 pb-8 bg-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-3xl font-bold text-slate-900 mb-2">
-          Política de privacidad
-        </h1>
-        <p class="text-slate-600">
-          Último actualización: <strong>22/06/2026</strong>
-        </p>
-      </div>
-    </section>
-
-    <section class="py-12">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <article class="prose lg:prose-lg text-slate-700">
-          <section>
-            <h2>1. Información que recopilamos</h2>
-            <p>
-              Podemos recopilar información que nos proporcionas directamente
-              (por ejemplo, nombre, correo electrónico) y datos recogidos
-              automáticamente (como cookies y datos de uso).
-            </p>
-          </section>
-
-          <section>
-            <h2>2. Cómo utilizamos la información</h2>
-            <p>
-              Usamos los datos para prestar y mejorar nuestros servicios,
-              comunicarnos contigo y cumplir obligaciones legales.
-            </p>
-          </section>
-
-          <section>
-            <h2>3. Cookies y tecnologías similares</h2>
-            <p>
-              Utilizamos cookies para mejorar la experiencia del usuario. Puedes
-              gestionar las preferencias de cookies desde tu navegador.
-            </p>
-          </section>
-
-          <section>
-            <h2>4. Compartir con terceros</h2>
-            <p>
-              No vendemos tus datos. Podemos compartir información con
-              proveedores de servicio y cuando la ley lo exija.
-            </p>
-          </section>
-
-          <section>
-            <h2>5. Seguridad</h2>
-            <p>
-              Adoptamos medidas razonables para proteger tus datos, aunque
-              ningún sistema es 100% seguro.
-            </p>
-          </section>
-
-          <section>
-            <h2>6. Tus derechos</h2>
-            <p>
-              Dependiendo de tu jurisdicción, puedes tener derechos para
-              acceder, corregir o eliminar tus datos. Contacta con nosotros para
-              ejercerlos.
-            </p>
-          </section>
-
-          <section>
-            <h2>Contacto</h2>
-            <p>
-              Para consultas sobre privacidad, escribe a <a
-                href="mailto:privacy@example.com">privacy@example.com</a
-              >.
-            </p>
-          </section>
-        </article>
-      </div>
-    </section>
-  </main></Layout
+<LegalLayout
+  title="Política de privacidad"
+  dateLabel="Última actualización"
+  date="22/06/2026"
 >
+  <h2>1. Información que recopilamos</h2>
+  <p>
+    Podemos recopilar información que nos proporcionas directamente (por ejemplo, nombre, correo
+    electrónico) y datos recogidos automáticamente (como cookies y datos de uso).
+  </p>
+
+  <h2>2. Cómo utilizamos la información</h2>
+  <p>
+    Usamos los datos para prestar y mejorar nuestros servicios, comunicarnos contigo y cumplir
+    obligaciones legales.
+  </p>
+
+  <h2>3. Cookies y tecnologías similares</h2>
+  <p>
+    Utilizamos cookies para mejorar la experiencia del usuario. Puedes gestionar las preferencias de
+    cookies desde tu navegador.
+  </p>
+
+  <h2>4. Compartir con terceros</h2>
+  <p>
+    No vendemos tus datos. Podemos compartir información con proveedores de servicio y cuando la ley
+    lo exija.
+  </p>
+
+  <h2>5. Seguridad</h2>
+  <p>
+    Adoptamos medidas razonables para proteger tus datos, aunque ningún sistema es 100% seguro.
+  </p>
+
+  <h2>6. Tus derechos</h2>
+  <p>
+    Dependiendo de tu jurisdicción, puedes tener derechos para acceder, corregir o eliminar tus datos.
+    Contacta con nosotros para ejercerlos.
+  </p>
+
+  <h2>Contacto</h2>
+  <p>
+    Para consultas sobre privacidad, escribe a
+    <a href="mailto:privacy@example.com">privacy@example.com</a>.
+  </p>
+</LegalLayout>

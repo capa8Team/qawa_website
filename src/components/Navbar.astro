@@ -6,7 +6,7 @@ import { Droplet, Menu, X } from '@lucide/astro';
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 cursor-pointer">
+      <a href="/" id="nav-logo-link" class="flex items-center gap-2 cursor-pointer">
         <div class="bg-blue-600 p-2 rounded-lg">
           <Droplet class="text-white h-6 w-6" />
         </div>
@@ -15,17 +15,18 @@ import { Droplet, Menu, X } from '@lucide/astro';
 
       <!-- Desktop Nav -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href="/#solution" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Solución</a>
-        <a href="/#roi" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">ROI</a>
-        <a href="/#scalability" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Escalabilidad</a>
-        <a href="/#pricing" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Precios</a>
+        <a href="/#solution" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>Solución</a>
+        <a href="/#roi" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>ROI</a>
+        <a href="/#scalability" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>Escalabilidad</a>
+        <a href="/#pricing" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>Precios</a>
+        <a href="/#contact" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>Cotiza aquí</a>
       </div>
 
       <!-- Buttons -->
       <div class="hidden md:flex items-center space-x-4">
-        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium shadow-sm transition-all shadow-blue-600/20">
+        <a href="/demo/" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium shadow-sm transition-all shadow-blue-600/20">
           Ver Demo
-        </button>
+        </a>
       </div>
 
       <!-- Mobile menu button -->
@@ -41,12 +42,13 @@ import { Droplet, Menu, X } from '@lucide/astro';
   <!-- Mobile Nav -->
   <div id="mobile-menu" class="md:hidden bg-white border-b border-slate-200 hidden">
     <div class="px-4 pt-2 pb-6 space-y-4 shadow-xl">
-      <a href="#solution" class="block text-slate-600 font-medium py-2">Solución</a>
-      <a href="#roi" class="block text-slate-600 font-medium py-2">ROI</a>
-      <a href="#scalability" class="block text-slate-600 font-medium py-2">Escalabilidad</a>
-      <a href="#pricing" class="block text-slate-600 font-medium py-2">Precios</a>
+      <a href="/#solution" class="block text-slate-600 font-medium py-2" data-nav-scroll>Solución</a>
+      <a href="/#roi" class="block text-slate-600 font-medium py-2" data-nav-scroll>ROI</a>
+      <a href="/#scalability" class="block text-slate-600 font-medium py-2" data-nav-scroll>Escalabilidad</a>
+      <a href="/#pricing" class="block text-slate-600 font-medium py-2" data-nav-scroll>Precios</a>
+      <a href="/#contact" class="block text-slate-600 font-medium py-2" data-nav-scroll>Cotiza aquí</a>
       <div class="pt-4 flex flex-col gap-3">
-        <button class="text-blue-600 font-medium py-2 border border-blue-600 rounded-lg w-full">Ver Demo</button>
+        <a href="/demo/" class="text-blue-600 font-medium py-2 border border-blue-600 rounded-lg w-full text-center block">Ver Demo</a>
       </div>
     </div>
   </div>
@@ -58,9 +60,102 @@ import { Droplet, Menu, X } from '@lucide/astro';
   const iconOpen = document.getElementById('menu-icon-open');
   const iconClose = document.getElementById('menu-icon-close');
 
+  const NAV_OFFSET = 88;
+  const SECTION_IDS = ['solution', 'roi', 'scalability', 'pricing', 'contact'];
+
+  function isHomePage() {
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    return path === '' || path === '/' || path.endsWith('/index.html');
+  }
+
+  function closeMobileMenu() {
+    menu?.classList.add('hidden');
+    iconOpen?.classList.remove('hidden');
+    iconClose?.classList.add('hidden');
+  }
+
+  function scrollToSection(id) {
+    const target = document.getElementById(id);
+    if (!target) return false;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const top = target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+
+    return true;
+  }
+
+  function scrollToTop() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+  }
+
+  function getSectionIdFromHref(href) {
+    const match = href.match(/#([a-zA-Z0-9_-]+)/);
+    return match ? match[1] : null;
+  }
+
+  function shouldResetHomeOnLoad() {
+    if (!isHomePage()) return false;
+    const nav = performance.getEntriesByType('navigation')[0];
+    return !nav || nav.type === 'reload';
+  }
+
+  function ensurePageStartsAtTop() {
+    if (!shouldResetHomeOnLoad()) return;
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
+  function handleLogoClick(event) {
+    if (!isHomePage()) return;
+
+    event.preventDefault();
+    scrollToTop();
+    closeMobileMenu();
+  }
+
+  function handleNavScrollClick(event) {
+    const link = event.currentTarget;
+    if (!(link instanceof HTMLAnchorElement)) return;
+
+    const id = getSectionIdFromHref(link.getAttribute('href') || '');
+    if (!id || !SECTION_IDS.includes(id)) return;
+
+    if (!isHomePage()) return;
+
+    event.preventDefault();
+    scrollToSection(id);
+    closeMobileMenu();
+  }
+
   toggle?.addEventListener('click', () => {
     menu?.classList.toggle('hidden');
     iconOpen?.classList.toggle('hidden');
     iconClose?.classList.toggle('hidden');
   });
+
+  document.getElementById('nav-logo-link')?.addEventListener('click', handleLogoClick);
+
+  document.querySelectorAll('[data-nav-scroll]').forEach((link) => {
+    link.addEventListener('click', handleNavScrollClick);
+  });
+
+  ensurePageStartsAtTop();
 </script>
