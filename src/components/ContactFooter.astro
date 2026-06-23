@@ -102,9 +102,13 @@ import { Send } from '@lucide/astro';
   <script type="module">
     import emailjs from '@emailjs/browser';
 
-    const SERVICE_ID = 'service_gnksz99';
-    const TEMPLATE_ID = 'template_sa08yha';
-    const PUBLIC_KEY = 'BnEM61q7h7tLLFM7u';
+    const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      console.error('EmailJS no está configurado. Agrega PUBLIC_EMAILJS_SERVICE_ID, PUBLIC_EMAILJS_TEMPLATE_ID y PUBLIC_EMAILJS_PUBLIC_KEY en .env.');
+    }
 
     const form = document.getElementById('contact-form');
     const feedback = document.getElementById('contact-feedback');
@@ -129,6 +133,9 @@ import { Send } from '@lucide/astro';
       };
 
       try {
+        if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+          throw new Error('EmailJS no está configurado. Revisa las variables de entorno.');
+        }
         await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
 
         feedback.textContent = 'Mensaje enviado correctamente. Pronto nos contactaremos contigo.';
