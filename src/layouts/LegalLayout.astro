@@ -1,0 +1,33 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  dateLabel: string;
+  date: string;
+  metaTitle?: string;
+}
+
+const { title, dateLabel, date, metaTitle } = Astro.props;
+---
+
+<Layout title={metaTitle ?? `${title} | QAwa`}>
+  <main>
+    <section class="pt-24 pb-8 bg-white border-b border-slate-100">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-3xl font-bold text-slate-900 mb-2">{title}</h1>
+        <p class="text-slate-600">
+          {dateLabel}: <strong>{date}</strong>
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 pb-16">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <article class="legal-content text-slate-700">
+          <slot />
+        </article>
+      </div>
+    </section>
+  </main>
+</Layout>
