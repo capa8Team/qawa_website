@@ -12,9 +12,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@lucide/astro": "^1.18.0",
     "@tailwindcss/vite": "^4.3.1",
-    "astro": "^6.4.6",
+    "astro": "^7.0.1",
     "tailwindcss": "^4.3.1"
   }
 }

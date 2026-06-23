@@ -1,0 +1,12 @@
+node_modules
+dist
+.astro
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+*.md
+docs
+.vscode
+ver_0.1.code-workspace

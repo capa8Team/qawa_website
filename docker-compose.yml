@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PUBLIC_EMAILJS_SERVICE_ID: ${PUBLIC_EMAILJS_SERVICE_ID}
+        PUBLIC_EMAILJS_TEMPLATE_ID: ${PUBLIC_EMAILJS_TEMPLATE_ID}
+        PUBLIC_EMAILJS_PUBLIC_KEY: ${PUBLIC_EMAILJS_PUBLIC_KEY}
+    ports:
+      - "8080:80"
+    restart: unless-stopped

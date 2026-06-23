@@ -24,7 +24,7 @@ import { Send } from '@lucide/astro';
                 </div>
                 <div>
                   <p class="text-sm text-blue-200">Email Directo</p>
-                  <p class="font-semibold">agronomia@qawa.com</p>
+                  <p class="font-semibold">theuntitledsoft@gmail.com</p>
                 </div>
               </div>
               <div class="flex items-center gap-4 text-blue-100">
@@ -50,11 +50,11 @@ import { Send } from '@lucide/astro';
 
         <!-- Form -->
         <div class="p-12 lg:p-16">
-          <form class="space-y-6">
+          <form id="contact-form" class="space-y-6">
             <div class="grid grid-cols-2 gap-6">
               <div class="space-y-2 col-span-2 sm:col-span-1">
                 <label for="name" class="text-sm font-medium text-slate-700">Nombre completo</label>
-                <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" placeholder="Ej. Juan Pérez" />
+                <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" placeholder="Ej. Juan Pérez" />
               </div>
               <div class="space-y-2 col-span-2 sm:col-span-1">
                 <label for="company" class="text-sm font-medium text-slate-700">Empresa / Fundo</label>
@@ -63,19 +63,32 @@ import { Send } from '@lucide/astro';
             </div>
 
             <div class="space-y-2">
-              <label for="email" class="text-sm font-medium text-slate-700">Email laboral</label>
-              <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" placeholder="juan@agricola.com" />
+              <label for="email" class="contact-label text-sm font-medium text-slate-700">Email laboral</label>
+              <input type="email" id="email" name="email" required class="contact-input w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" placeholder="juan@agricola.com" />
+            </div>
+
+            <div class="space-y-2">
+              <label for="subject" class="contact-label text-sm font-medium text-slate-700">Motivo del contacto</label>
+              <select id="subject" name="subject" required class="contact-select w-full px-4 py-3 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                <option value="Cotización">Cotización</option>
+                <option value="Soporte">Soporte</option>
+                <option value="Alianzas">Alianzas</option>
+                <option value="Otro">Otro</option>
+              </select>
             </div>
 
             <div class="space-y-2">
               <label for="message" class="text-sm font-medium text-slate-700">Mensaje o Detalles de tu proyecto</label>
-              <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none" placeholder="Tengo 3 embalses de 10.000m3 para riego de arándanos..."></textarea>
+              <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none" placeholder="Tengo 3 embalses de 10.000m3 para riego de arándanos..."></textarea>
             </div>
 
-            <button type="submit" class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-xl font-bold transition-all shadow-md">
+            <button id="contact-submit" type="submit" class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-xl font-bold transition-all shadow-md">
               <Send class="h-4 w-4" />
               Solicitar Contacto
             </button>
+
+            <p id="contact-feedback" class="text-xs text-center text-slate-500 mt-4" aria-live="polite"></p>
+
             <p class="text-xs text-center text-slate-500 mt-4">
               Al enviar este formulario aceptas nuestra política de privacidad.
             </p>
@@ -85,4 +98,57 @@ import { Send } from '@lucide/astro';
       </div>
     </div>
   </div>
+
+  <script type="module">
+    import emailjs from '@emailjs/browser';
+
+    const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      console.error('EmailJS no está configurado. Agrega PUBLIC_EMAILJS_SERVICE_ID, PUBLIC_EMAILJS_TEMPLATE_ID y PUBLIC_EMAILJS_PUBLIC_KEY en .env.');
+    }
+
+    const form = document.getElementById('contact-form');
+    const feedback = document.getElementById('contact-feedback');
+    const submitButton = document.getElementById('contact-submit');
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form) return;
+
+      submitButton.disabled = true;
+      submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+      feedback.textContent = 'Enviando mensaje...';
+      feedback.className = 'text-xs text-center text-slate-500 mt-4';
+
+      const formData = new FormData(form);
+      const templateParams = {
+        from_name: formData.get('name') || 'Sin nombre',
+        company: formData.get('company') || 'No proporcionado',
+        reply_to: formData.get('email') || 'Sin email',
+        subject: formData.get('subject') || 'Consulta general',
+        message: formData.get('message') || 'Sin mensaje',
+      };
+
+      try {
+        if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+          throw new Error('EmailJS no está configurado. Revisa las variables de entorno.');
+        }
+        await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+        feedback.textContent = 'Mensaje enviado correctamente. Pronto nos contactaremos contigo.';
+        feedback.className = 'text-xs text-center text-emerald-600 mt-4';
+        form.reset();
+      } catch (error) {
+        console.error('EmailJS error:', error);
+        feedback.textContent = 'Error al enviar. Revisa tu conexión e intenta otra vez.';
+        feedback.className = 'text-xs text-center text-red-500 mt-4';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
+    });
+  </script>
 </section>
