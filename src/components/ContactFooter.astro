@@ -24,7 +24,7 @@ import { Send } from '@lucide/astro';
                 </div>
                 <div>
                   <p class="text-sm text-blue-200">Email Directo</p>
-                  <p class="font-semibold">agronomia@qawa.com</p>
+                  <p class="font-semibold">theuntitledsoft@gmail.com</p>
                 </div>
               </div>
               <div class="flex items-center gap-4 text-blue-100">
@@ -63,8 +63,18 @@ import { Send } from '@lucide/astro';
             </div>
 
             <div class="space-y-2">
-              <label for="email" class="text-sm font-medium text-slate-700">Email laboral</label>
-              <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" placeholder="juan@agricola.com" />
+              <label for="email" class="contact-label text-sm font-medium text-slate-700">Email laboral</label>
+              <input type="email" id="email" name="email" required class="contact-input w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" placeholder="juan@agricola.com" />
+            </div>
+
+            <div class="space-y-2">
+              <label for="subject" class="contact-label text-sm font-medium text-slate-700">Motivo del contacto</label>
+              <select id="subject" name="subject" required class="contact-select w-full px-4 py-3 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                <option value="Cotización">Cotización</option>
+                <option value="Soporte">Soporte</option>
+                <option value="Alianzas">Alianzas</option>
+                <option value="Otro">Otro</option>
+              </select>
             </div>
 
             <div class="space-y-2">
@@ -90,6 +100,12 @@ import { Send } from '@lucide/astro';
   </div>
 
   <script type="module">
+    import emailjs from '@emailjs/browser';
+
+    const SERVICE_ID = 'service_gnksz99';
+    const TEMPLATE_ID = 'template_sa08yha';
+    const PUBLIC_KEY = 'BnEM61q7h7tLLFM7u';
+
     const form = document.getElementById('contact-form');
     const feedback = document.getElementById('contact-feedback');
     const submitButton = document.getElementById('contact-submit');
@@ -101,33 +117,25 @@ import { Send } from '@lucide/astro';
       submitButton.disabled = true;
       submitButton.classList.add('opacity-70', 'cursor-not-allowed');
       feedback.textContent = 'Enviando mensaje...';
+      feedback.className = 'text-xs text-center text-slate-500 mt-4';
 
       const formData = new FormData(form);
-      const payload = {
-        name: formData.get('name'),
-        company: formData.get('company'),
-        email: formData.get('email'),
-        message: formData.get('message'),
+      const templateParams = {
+        from_name: formData.get('name') || 'Sin nombre',
+        company: formData.get('company') || 'No proporcionado',
+        reply_to: formData.get('email') || 'Sin email',
+        subject: formData.get('subject') || 'Consulta general',
+        message: formData.get('message') || 'Sin mensaje',
       };
 
       try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
+        await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
 
-        const result = await response.json();
-
-        if (!response.ok || result.error) {
-          feedback.textContent = result.error || 'No se pudo enviar el formulario. Intenta de nuevo.';
-          feedback.className = 'text-xs text-center text-red-500 mt-4';
-        } else {
-          feedback.textContent = 'Mensaje enviado correctamente. Pronto nos contactaremos contigo.';
-          feedback.className = 'text-xs text-center text-emerald-600 mt-4';
-          form.reset();
-        }
+        feedback.textContent = 'Mensaje enviado correctamente. Pronto nos contactaremos contigo.';
+        feedback.className = 'text-xs text-center text-emerald-600 mt-4';
+        form.reset();
       } catch (error) {
+        console.error('EmailJS error:', error);
         feedback.textContent = 'Error al enviar. Revisa tu conexión e intenta otra vez.';
         feedback.className = 'text-xs text-center text-red-500 mt-4';
       } finally {
