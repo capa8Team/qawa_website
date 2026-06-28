@@ -1,75 +1,330 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import {
+  ArrowRight,
+  Droplets,
+  HeartHandshake,
+  Leaf,
+  MapPin,
+  Mail,
+  PlayCircle,
+  Shield,
+  Sprout,
+  Target,
+  Users,
+} from '@lucide/astro';
+
+const values = [
+  {
+    icon: Sprout,
+    title: 'Orientación al campo',
+    text: 'Diseñamos pensando en quienes trabajan el agua y el suelo todos los días: instalación simple, lecturas claras y alertas que realmente sirven para actuar.',
+    color: 'emerald',
+  },
+  {
+    icon: Shield,
+    title: 'Confiabilidad',
+    text: 'Hardware robusto, comunicación estable y datos trazables para que puedas confiar en lo que ves en el panel, incluso en sectores con conectividad limitada.',
+    color: 'blue',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'Cercanía con el usuario',
+    text: 'Escuchamos a agricultores, operadores y agrónomos para iterar el producto con problemas reales, no con supuestos de escritorio.',
+    color: 'purple',
+  },
+  {
+    icon: Leaf,
+    title: 'Sostenibilidad productiva',
+    text: 'Ayudamos a cuidar el recurso hídrico y a reducir pérdidas por calidad del agua, protegiendo la rentabilidad del cultivo a largo plazo.',
+    color: 'emerald',
+  },
+];
+
+const colorMap: Record<string, { bg: string; text: string; ring: string }> = {
+  blue: { bg: 'bg-blue-50', text: 'text-blue-600', ring: 'ring-blue-100' },
+  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', ring: 'ring-emerald-100' },
+  purple: { bg: 'bg-purple-50', text: 'text-purple-600', ring: 'ring-purple-100' },
+};
 ---
 
-<Layout>
+<Layout
+  title="Sobre nosotros | QAwa"
+  description="Conoce a Untitled SpA. y QAwa: tecnología chilena de monitoreo inteligente de calidad de agua para embalses y cultivos agrícolas."
+>
   <main>
-    <!-- Hero pequeño coherente con diseño principal -->
-    <section class="relative pt-24 pb-12 bg-slate-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Hero -->
+    <section class="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-slate-50">
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/4 w-[900px] h-[500px] rounded-full bg-gradient-to-br from-blue-300/30 to-emerald-200/40 blur-3xl pointer-events-none"
+        aria-hidden="true"
+      ></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="max-w-3xl mx-auto text-center">
-          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/60 border border-blue-200 text-blue-700 font-medium text-sm mb-4">
+          <span
+            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/60 border border-blue-200 text-blue-700 font-medium text-sm mb-6"
+          >
             <span class="h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
             Quiénes somos
           </span>
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-4">Nos apasiona proteger el agua que hace crecer tus cultivos</h1>
-          <p class="text-lg text-slate-600 mb-8">En <strong>Untitled SpA.</strong> combinamos IoT, análisis y agronomía para ofrecer soluciones prácticas de monitoreo y control de la calidad del agua.</p>
-          <div class="flex justify-center gap-4">
-            <a href="/" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold shadow">Volver al inicio</a>
-            <a href="/#contact" class="inline-flex items-center gap-2 bg-white border border-slate-200 text-slate-700 px-6 py-3 rounded-xl font-semibold hover:bg-slate-50">Contáctanos</a>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-6">
+            Tecnología chilena al servicio del
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500">
+                agua que alimenta tus cultivos
+            </span>
+          </h1>
+
+          <p class="text-lg sm:text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl mx-auto">
+            Somos <strong class="text-slate-800">Untitled SpA.</strong>, el equipo detrás de
+            <strong class="text-slate-800">QAwa</strong>: una plataforma de monitoreo inteligente que
+            combina boyas IoT, análisis de datos y experiencia en campo para proteger la calidad del
+            agua en embalses y sistemas de riego.
+          </p>
+
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a
+              href="/"
+              class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-7 py-3.5 rounded-xl font-semibold shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5"
+            >
+              Volver al inicio
+            </a>
+            <a
+              href="/#contact"
+              class="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 px-7 py-3.5 rounded-xl font-semibold hover:bg-slate-50 transition-all hover:-translate-y-0.5"
+            >
+              Contáctanos
+              <ArrowRight class="h-5 w-5" />
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="py-12">
+    <!-- Historia + misión -->
+    <section class="py-20 lg:py-24 bg-white border-b border-slate-200/80">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-3 gap-8 items-start">
-          <div class="lg:col-span-2">
-            <div class="prose max-w-none text-slate-700">
-              <h2>Nuestra misión</h2>
-              <p>Ofrecer tecnología accesible y confiable para que agricultores y gestores de recursos hídricos tomen decisiones tempranas y reduzcan riesgos en la producción agrícola.</p>
-
-              <h3>Qué hacemos</h3>
-              <p>Desarrollamos boyas IoT con sensores de pH, conductividad y temperatura, integradas con alertas y dashboards que simplifican el monitoreo diario.</p>
-
-              <h3>Valores</h3>
-              <ul>
-                <li>Orientación a resultados</li>
-                <li>Diseño sencillo y robusto</li>
-                <li>Transparencia en datos</li>
-                <li>Colaboración con usuarios y agrónomos</li>
-              </ul>
-
-              <h3>Equipo</h3>
-              <p>Equipo multidisciplinar con experiencia en hardware, software y ciencia de datos, enfocado en soluciones aplicadas al campo.</p>
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wider text-blue-600 mb-3">Nuestra historia</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 leading-snug">
+              Nacimos con una pregunta simple: ¿cómo saber a tiempo si el agua deja de ser apta para el cultivo?
+            </h2>
+            <div class="space-y-5 text-slate-600 leading-relaxed text-base sm:text-lg">
+              <p>
+                En la agricultura de precisión, muchas decisiones siguen dependiendo de muestreos
+                esporádicos o de la intuición del operador. Eso deja una ventana de riesgo enorme:
+                variaciones de pH, conductividad o temperatura pueden afectar rendimiento, sanidad del
+                cultivo y uso eficiente del recurso hídrico sin que el equipo de campo lo note de
+                inmediato.
+              </p>
+              <p>
+                QAwa surge para cerrar esa brecha. Desarrollamos boyas inteligentes que miden en
+                continuo, envían datos a la nube y alertan cuando algo sale del rango esperado, para
+                que puedas intervenir antes de que el problema escale.
+              </p>
+              <p>
+                Trabajamos desde Chile, con foco en embalses, canales y puntos críticos de riego
+                donde la calidad del agua impacta directamente en la producción.
+              </p>
             </div>
           </div>
 
-          <aside class="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
-            <h4 class="text-slate-900 font-semibold mb-3">Contacto</h4>
-            <p class="text-sm text-slate-600 mb-4">¿Quieres una demo o cotización personalizada?</p>
-            <a href="/#contact" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-semibold">Escríbenos</a>
+          <div class="space-y-6">
+            <article class="rounded-2xl border border-slate-100 bg-slate-50/80 p-8 shadow-sm">
+              <div class="flex items-start gap-4">
+                <div class="shrink-0 w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                  <Target class="h-6 w-6 text-blue-600" />
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-3">Misión</h3>
+                  <p class="text-slate-600 leading-relaxed">
+                    Democratizar el monitoreo de calidad de agua con tecnología accesible, confiable
+                    y fácil de adoptar, para que productores y gestores hídricos tomen decisiones
+                    informadas y a tiempo.
+                  </p>
+                </div>
+              </div>
+            </article>
 
-            <div class="mt-6 border-t border-slate-100 pt-4 text-sm text-slate-500">
-              <p><strong>Oficina:</strong> Valparaíso, Chile</p>
-              <p><strong>Email:</strong> <a href="mailto:info@example.com" class="text-blue-600 hover:underline">theuntitledsoft@gmail.com</a></p>
+            <article class="rounded-2xl border border-slate-100 bg-gradient-to-br from-blue-50/80 to-emerald-50/60 p-8 shadow-sm">
+              <div class="flex items-start gap-4">
+                <div class="shrink-0 w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
+                  <Droplets class="h-6 w-6 text-emerald-600" />
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-3">Visión</h3>
+                  <p class="text-slate-600 leading-relaxed">
+                    Ser la referencia en monitoreo inteligente de agua para la agricultura en
+                    Latinoamérica, integrando sensores, datos y buenas prácticas agronómicas en una
+                    sola experiencia.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Separador entre historia y valores -->
+    <div class="bg-slate-50 border-b border-slate-200/60" aria-hidden="true">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
+        <div class="flex items-center gap-4 sm:gap-6">
+          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-300 to-slate-300"></div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+            <span class="h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 to-emerald-500"></span>
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+          </div>
+          <div class="flex-1 h-px bg-gradient-to-l from-transparent via-slate-300 to-slate-300"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Valores -->
+    <section class="py-20 lg:py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <p class="text-sm font-semibold uppercase tracking-wider text-blue-600 mb-3">Nuestros valores</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Cómo trabajamos</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6 lg:gap-8">
+          {
+            values.map(({ icon: Icon, title, text, color }) => {
+              const c = colorMap[color] ?? colorMap.blue;
+              return (
+                <article
+                  class={`flex gap-5 p-6 sm:p-8 rounded-2xl border border-slate-100 bg-white shadow-sm ring-1 ${c.ring}`}
+                >
+                  <div class={`shrink-0 w-12 h-12 rounded-xl ${c.bg} flex items-center justify-center`}>
+                    <Icon class={`h-6 w-6 ${c.text}`} />
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">{title}</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">{text}</p>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Equipo + contacto -->
+    <section class="py-20 lg:py-24 bg-white border-t border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-3 gap-10 lg:gap-12 items-start">
+          <div class="lg:col-span-2">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                <Users class="h-6 w-6 text-blue-600" />
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Un equipo multidisciplinar</h2>
             </div>
+            <div class="space-y-5 text-slate-600 leading-relaxed text-base sm:text-lg">
+              <p>
+                Reunimos perfiles de ingeniería, desarrollo de software, electrónica y análisis de
+                datos con vocación por resolver problemas reales en terreno. No vendemos promesas
+                abstractas: construimos herramientas que se instalan, se usan y se mantienen en
+                condiciones agrícolas exigentes.
+              </p>
+              <p>
+                Colaboramos de cerca con operadores de riego, administradores de embalses y
+                asesores técnicos para afinar alertas, flujos de trabajo y la experiencia del panel.
+                Cada mejora en QAwa nace de escuchar a quienes viven el problema todos los días.
+              </p>
+            </div>
+          </div>
+
+          <aside class="bg-white rounded-2xl p-8 shadow-lg border border-slate-100 lg:sticky lg:top-28">
+            <h3 class="text-lg font-bold text-slate-900 mb-2">Hablemos</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+              ¿Quieres una demo guiada, una cotización o explorar un piloto en tu embalse? Escríbenos
+              y te respondemos con propuesta concreta.
+            </p>
+
+            <a
+              href="/#contact"
+              class="flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white px-5 py-3.5 rounded-xl font-semibold transition-colors mb-6"
+            >
+              Ir al formulario
+              <ArrowRight class="h-4 w-4" />
+            </a>
+
+            <a
+              href="/demo/"
+              class="flex items-center justify-center gap-2 w-full border border-slate-200 text-slate-700 hover:bg-slate-50 px-5 py-3.5 rounded-xl font-semibold transition-colors mb-8"
+            >
+              <PlayCircle class="h-4 w-4 text-blue-600" />
+              Probar demo
+            </a>
+
+            <ul class="space-y-4 text-sm text-slate-600 border-t border-slate-100 pt-6">
+              <li class="flex items-start gap-3">
+                <MapPin class="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+                <span>
+                  <strong class="text-slate-800 block">Ubicación</strong>
+                  Valparaíso, Chile
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Mail class="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+                <span>
+                  <strong class="text-slate-800 block">Correo</strong>
+                  <a href="mailto:theuntitledsoft@gmail.com" class="text-blue-600 hover:underline">
+                    theuntitledsoft@gmail.com
+                  </a>
+                </span>
+              </li>
+            </ul>
           </aside>
         </div>
       </div>
     </section>
 
-    <section class="py-12 bg-blue-50">
+    <!-- CTA final -->
+    <section class="py-16 lg:py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="rounded-2xl p-8 sm:p-12 bg-gradient-to-r from-blue-50 to-emerald-50 border border-blue-100 shadow-sm">
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-            <div>
-              <h3 class="text-lg font-semibold text-slate-900">¿Listo para mejorar el cultivo con datos?</h3>
-              <p class="text-slate-600">Te ayudamos a implementar monitoreo confiable y acción temprana.</p>
+        <div
+          class="relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-14 bg-gradient-to-br from-blue-600 to-emerald-600 text-white shadow-xl shadow-blue-900/10"
+        >
+          <div
+            class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-white/10 blur-2xl pointer-events-none"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="absolute -left-10 -bottom-10 w-48 h-48 rounded-full bg-emerald-400/20 blur-2xl pointer-events-none"
+            aria-hidden="true"
+          ></div>
+
+          <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            <div class="max-w-xl">
+              <h2 class="text-2xl sm:text-3xl font-bold mb-4 leading-snug">
+                ¿Listo para monitorear tus cultivos?
+              </h2>
+              <p class="text-blue-50 text-base sm:text-lg leading-relaxed">
+                Conoce QAwa en una demostración guiada de 8 pasos o contáctanos para diseñar una
+                implementación a la medida de tu operación.
+              </p>
             </div>
-            <div>
-              <a href="/demo/" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold">Demostración</a>
+            <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+              <a
+                href="/demo/"
+                class="inline-flex items-center justify-center gap-2 bg-white text-blue-700 hover:bg-blue-50 px-7 py-3.5 rounded-xl font-semibold transition-colors"
+              >
+                <PlayCircle class="h-5 w-5" />
+                Ver demostración
+              </a>
+              <a
+                href="/#contact"
+                class="inline-flex items-center justify-center gap-2 border border-white/40 text-white hover:bg-white/10 px-7 py-3.5 rounded-xl font-semibold transition-colors"
+              >
+                Solicitar cotización
+              </a>
             </div>
           </div>
         </div>
