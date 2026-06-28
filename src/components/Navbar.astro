@@ -16,7 +16,6 @@ import { Droplet, Menu, X } from '@lucide/astro';
       <!-- Desktop Nav -->
       <div class="hidden md:flex items-center space-x-8">
         <a href="/#solution" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>Solución</a>
-        <a href="/#roi" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>ROI</a>
         <a href="/#scalability" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>Escalabilidad</a>
         <a href="/#pricing" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>Precios</a>
         <a href="/#contact" class="text-slate-600 hover:text-blue-600 font-medium transition-colors" data-nav-scroll>Cotiza aquí</a>
@@ -43,7 +42,6 @@ import { Droplet, Menu, X } from '@lucide/astro';
   <div id="mobile-menu" class="md:hidden bg-white border-b border-slate-200 hidden">
     <div class="px-4 pt-2 pb-6 space-y-4 shadow-xl">
       <a href="/#solution" class="block text-slate-600 font-medium py-2" data-nav-scroll>Solución</a>
-      <a href="/#roi" class="block text-slate-600 font-medium py-2" data-nav-scroll>ROI</a>
       <a href="/#scalability" class="block text-slate-600 font-medium py-2" data-nav-scroll>Escalabilidad</a>
       <a href="/#pricing" class="block text-slate-600 font-medium py-2" data-nav-scroll>Precios</a>
       <a href="/#contact" class="block text-slate-600 font-medium py-2" data-nav-scroll>Cotiza aquí</a>
@@ -61,7 +59,7 @@ import { Droplet, Menu, X } from '@lucide/astro';
   const iconClose = document.getElementById('menu-icon-close');
 
   const NAV_OFFSET = 88;
-  const SECTION_IDS = ['solution', 'roi', 'scalability', 'pricing', 'contact'];
+  const SECTION_IDS = ['solution', 'scalability', 'pricing', 'contact'];
 
   function isHomePage() {
     const path = window.location.pathname.replace(/\/$/, '') || '/';

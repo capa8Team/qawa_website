@@ -116,7 +116,7 @@
 /* Botón terminar demo */
 .demo-exit-btn {
   position: fixed;
-  top: 14px;
+  bottom: 14px;
   right: 14px;
   z-index: 10040;
   padding: 8px 14px;
@@ -1261,12 +1261,6 @@ body.demo-tour-completion .driver-popover {
   .demo-header-actions {
     width: 100%;
     justify-content: flex-start;
-  }
-
-  .demo-exit-btn {
-    top: auto;
-    bottom: 14px;
-    right: 14px;
   }
 
   .demo-back-btn {
