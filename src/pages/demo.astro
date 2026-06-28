@@ -1,6 +1,9 @@
 ---
 import DemoLayout from '../layouts/DemoLayout.astro';
 import '../styles/demo.css';
+
+const demoTourSteps = 8;
+const demoBuildId = import.meta.env.PUBLIC_DEMO_BUILD_ID ?? 'dev';
 ---
 
 <DemoLayout>
@@ -12,7 +15,7 @@ import '../styles/demo.css';
         Recorre el panel de monitoreo con datos simulados. Verás cómo se gestionan las boyas,
         las alertas y el historial del embalse — sin conexión a sensores reales.
       </p>
-      <p class="demo-intro-hint">Usa <strong>Siguiente</strong> o las flechas <strong>← →</strong> para avanzar.</p>
+      <p class="demo-intro-hint">Recorrido de <strong>8 pasos</strong>. Usa <strong>Siguiente</strong> o las flechas <strong>← →</strong> para avanzar.</p>
       <button type="button" class="demo-btn-primary demo-intro-start-btn" id="demo-intro-start">Comenzar recorrido</button>
     </div>
   </div>
@@ -537,13 +540,14 @@ import '../styles/demo.css';
       }
 
       const stepScreens = [
-        'login', 'login', 'login',
-        'devices', 'devices', 'devices', 'devices', 'devices',
-        'devices', 'activity', 'devices',
-        'historical', 'historical', 'historical', 'historical',
-        'devices', 'devices', 'devices', 'devices',
-        'dashboard', 'dashboard', 'dashboard', 'dashboard', 'dashboard', 'dashboard', 'dashboard',
+        'login',
+        'devices',
+        'devices',
         'dashboard',
+        'dashboard',
+        'historical',
+        'devices',
+        'devices',
       ];
 
       let driverObj = null;
@@ -644,129 +648,49 @@ import '../styles/demo.css';
         {
           isOverview: true,
           popover: {
-            title: 'Pantalla de inicio de sesión',
-            description: 'Esta es la sección donde cada usuario ingresa con su correo y contraseña. Tómate un momento para ver la pantalla completa; en el siguiente paso te explicamos cada parte.' + hint('el formulario de acceso'),
-            popoverClass: 'qawa-demo-popover qawa-demo-popover--overview',
-          },
-        },
-        {
-          element: '#demo-login-form',
-          popover: {
             title: 'Inicio de sesión',
-            description: 'Cada usuario accede con el correo y contraseña que el administrador creó. Así solo las personas autorizadas pueden ver los datos del embalse.' + hint('el botón Iniciar sesión'),
-            side: 'right',
-            align: 'center',
-          },
-        },
-        {
-          element: '#demo-login-btn',
-          popover: {
-            title: 'Entrar al sistema',
-            description: 'Al iniciar sesión llegas al panel principal con el listado de boyas y las herramientas de administración.' + hint('el panel de dispositivos'),
-            side: 'right',
-            align: 'center',
+            description: 'Cada usuario ingresa con correo y contraseña asignados por el administrador. Al iniciar sesión accedes al panel principal con todas las boyas y herramientas de gestión.' + hint('el panel de dispositivos'),
+            popoverClass: 'qawa-demo-popover qawa-demo-popover--overview',
           },
         },
         {
           isOverview: true,
           popover: {
             title: 'Panel de dispositivos',
-            description: 'Esta es la sección donde ves todas las boyas conectadas, su estado y las herramientas de administración. Observa la pantalla; a continuación recorreremos cada función.' + hint('la gestión de dispositivos'),
+            description: 'Aquí ves todas las boyas conectadas con sus lecturas actuales (pH, temperatura, conductividad) y estado de conexión. También puedes agregar boyas, gestionar usuarios y abrir el registro histórico.' + hint('el detalle de una boya'),
             popoverClass: 'qawa-demo-popover qawa-demo-popover--overview',
           },
         },
         {
-          element: '#demo-admin-toolbar',
+          element: '#demo-device-card-1',
           popover: {
-            title: 'Gestión de dispositivos',
-            description: 'Como administrador puedes detectar boyas nuevas automáticamente o agregarlas manualmente si ya conoces su identificador.' + hint('Agregar manual'),
-            side: 'bottom',
-          },
-        },
-        {
-          element: '#demo-add-manual-btn',
-          popover: {
-            title: 'Agregar dispositivo manualmente',
-            description: 'Usa este botón cuando la boya ya está configurada y solo necesitas registrarla en el sistema con sus datos de conexión.' + hint('el formulario de registro'),
-            side: 'bottom',
-          },
-        },
-        {
-          element: '#demo-add-device-form',
-          panelId: 'demo-add-device-modal',
-          popover: {
-            title: 'Datos del nuevo dispositivo',
-            description: 'Aquí completas la información: nombre, tipo de microcontrolador, ubicación, identificador, clave MQTT y el topic donde envía las mediciones. Los campos con asterisco son obligatorios.' + hint('Gestión de usuarios'),
+            title: 'Detalle de una boya',
+            description: 'Al seleccionar una boya entras a su vista completa: estado del equipo, lecturas en vivo, clima del sector y alertas del día.' + hint('las lecturas en tiempo real'),
             side: 'right',
-            align: 'start',
           },
         },
         {
-          element: '#demo-admin-users-btn',
+          element: '#demo-sensors-section',
           popover: {
-            title: 'Administración de cuentas',
-            description: 'Desde aquí gestionas los usuarios del sistema: creas cuentas para tu equipo y defines quién es administrador y quién solo consulta datos.' + hint('Actividad de cuentas'),
-            side: 'bottom',
-            align: 'end',
-          },
-        },
-        {
-          element: '#demo-admin-activity-btn',
-          popover: {
-            title: 'Actividad de cuentas',
-            description: 'Este botón abre el seguimiento de inicios de sesión: quién entró al sistema, cuándo y si hubo intentos fallidos.' + hint('la tabla de actividad'),
-            side: 'bottom',
-            align: 'end',
-          },
-        },
-        {
-          element: '#demo-activity-section',
-          popover: {
-            title: 'Seguimiento de actividad',
-            description: 'Aquí ves el historial de accesos por usuario: último login, rol, cantidad de ingresos y fallos. Puedes filtrar por ventana de 7, 30 o 90 días.' + hint('Registro Histórico'),
+            title: 'Lecturas en tiempo real',
+            description: 'Los tres valores clave del agua — pH, temperatura y conductividad — se actualizan automáticamente. Los colores indican si están en rango normal o requieren atención.' + hint('las alertas automáticas'),
             side: 'top',
           },
         },
         {
-          element: '#demo-devices-history-btn',
+          element: '#demo-alerts-section',
           popover: {
-            title: 'Registro Histórico',
-            description: 'Abre la vista de datos históricos con gráficos de tendencia y la tabla de mediciones de todos los dispositivos.' + hint('la pantalla de Datos Históricos'),
-            side: 'bottom',
-            align: 'end',
+            title: 'Alertas automáticas',
+            description: 'Cuando un valor sale del rango seguro, el sistema registra una alerta y puede notificarte por Telegram o correo. Los administradores pueden ajustar los umbrales desde «Configuración rango alertas».' + hint('los datos históricos'),
+            side: 'top',
           },
         },
         {
           isOverview: true,
           popover: {
-            title: 'Datos Históricos',
-            description: 'Esta sección muestra el registro de mediciones pasadas con gráficos por sensor y tabla filtrable. Tómate un momento para ubicarte; luego revisamos cada parte.' + hint('el gráfico de pH'),
+            title: 'Datos históricos',
+            description: 'Consulta gráficos de tendencia por sensor (hora, día o semana), la tabla de mediciones filtrable y exporta informes en PDF. Ideal para análisis y reportes periódicos.' + hint('el mapa de ubicación'),
             popoverClass: 'qawa-demo-popover qawa-demo-popover--overview',
-          },
-        },
-        {
-          element: '#demo-chart-ph',
-          popover: {
-            title: 'Gráficos por sensor',
-            description: 'Cada gráfico muestra la evolución del valor en el tiempo. Puedes cambiar el período entre 1 hora, 1 día y 1 semana, y ver el máximo, mínimo y promedio.' + hint('la tabla de mediciones'),
-            side: 'bottom',
-          },
-        },
-        {
-          element: '#demo-measurements-table',
-          popover: {
-            title: 'Mediciones En Tiempo Real',
-            description: 'Tabla con todas las mediciones registradas. Puedes filtrar por sensor y por fecha (día específico o rango). Se actualiza automáticamente cada 30 segundos.' + hint('Descargar PDF'),
-            side: 'top',
-          },
-        },
-        {
-          element: '#demo-pdf-btn',
-          popover: {
-            title: 'Descargar PDF',
-            description: 'Como administrador puedes exportar un informe en PDF con alertas y mediciones filtradas por dispositivo, sensor y fechas.' + hint('el mapa de ubicación'),
-            side: 'bottom',
-            align: 'end',
           },
         },
         {
@@ -774,93 +698,7 @@ import '../styles/demo.css';
           panelId: 'demo-location-map-panel',
           popover: {
             title: 'Mapa de ubicación',
-            description: 'Este icono abre el mapa con la ubicación real del embalse. También puedes alternar entre vista de cuadrícula y lista con los iconos de la izquierda.' + hint('los sectores en el mapa'),
-            side: 'bottom',
-            align: 'start',
-          },
-        },
-        {
-          element: '#demo-location-map-view',
-          panelId: 'demo-location-map-panel',
-          popover: {
-            title: 'Sectores del embalse',
-            description: 'El mapa agrupa las boyas por sector: Zona Norte, Zona Sur y Zona Este. Cada punto rojo indica dónde está instalado un dispositivo.' + hint('las acciones de cada tarjeta'),
-            side: 'top',
-            align: 'center',
-          },
-        },
-        {
-          element: '#demo-device-actions',
-          popover: {
-            title: 'Acciones del dispositivo',
-            description: 'En la esquina inferior derecha de cada tarjeta puedes modificar los datos de la boya o eliminarla del sistema si ya no está en uso.' + hint('seleccionar una boya'),
-            side: 'top',
-            align: 'end',
-          },
-        },
-        {
-          element: '#demo-device-card-1',
-          popover: {
-            title: 'Seleccionar un dispositivo',
-            description: 'Ahora haremos clic en esta boya para entrar a su vista de detalle: lecturas en vivo, clima del sector y alertas del día.',
-            side: 'right',
-          },
-        },
-        {
-          isOverview: true,
-          popover: {
-            title: 'Detalle del dispositivo',
-            description: 'Esta es la vista de una boya seleccionada: lecturas en vivo, clima del sector y alertas del día. Mira la pantalla completa antes de ver cada bloque.' + hint('el estado general'),
-            popoverClass: 'qawa-demo-popover qawa-demo-popover--overview',
-          },
-        },
-        {
-          element: '#demo-info-section',
-          popover: {
-            title: 'Estado general',
-            description: 'Aquí ves un resumen rápido: cuántos sensores están activos, si la boya está conectada, el nivel de batería y tu rol en el sistema.' + hint('las lecturas en tiempo real'),
-            side: 'bottom',
-          },
-        },
-        {
-          element: '#demo-sensors-section',
-          popover: {
-            title: 'Lecturas en tiempo real',
-            description: 'Estos son los tres valores clave del agua: pH, temperatura y conductividad. Los colores te indican si están en rango normal o si hay algo que revisar.' + hint('el clima del sector'),
-            side: 'top',
-          },
-        },
-        {
-          element: '#demo-weather-section',
-          popover: {
-            title: 'Clima del sector',
-            description: 'El clima local ayuda a entender cambios en el agua. Por ejemplo, mucho calor o lluvia pueden afectar la temperatura y la calidad del embalse.' + hint('las alertas del día'),
-            side: 'top',
-          },
-        },
-        {
-          element: '#demo-alerts-section',
-          popover: {
-            title: 'Alertas del día',
-            description: 'Cuando un valor sale del rango seguro, el sistema registra una alerta y puede avisarte por Telegram o correo. Aquí ves el historial del día.' + hint('configurar alertas'),
-            side: 'top',
-          },
-        },
-        {
-          element: '#demo-alert-config-btn',
-          popover: {
-            title: 'Configurar alertas',
-            description: 'Como administrador defines los rangos aceptables para cada sensor. Si un valor se sale de esos límites, se genera una alerta automática.' + hint('el mapa desde el detalle'),
-            side: 'bottom',
-            align: 'start',
-          },
-        },
-        {
-          element: '#demo-dashboard-map-btn',
-          panelId: 'demo-dashboard-location-map',
-          popover: {
-            title: 'Ubicación en el mapa',
-            description: 'Desde el detalle de un dispositivo también puedes abrir el mapa para ver dónde está instalada la boya y las demás del mismo sector.' + hint('cerrar el recorrido'),
+            description: 'Visualiza dónde está instalada cada boya en el embalse, agrupadas por sector (Norte, Sur, Este). Los puntos rojos marcan la ubicación de cada dispositivo.' + hint('cerrar el recorrido'),
             side: 'bottom',
             align: 'start',
           },
@@ -870,7 +708,7 @@ import '../styles/demo.css';
           isCompletion: true,
           popover: {
             title: '¡Recorrido completado!',
-            description: 'Ya conoces las funciones principales de QAwa: monitoreo en tiempo real, alertas, actividad de cuentas, mapa de ubicación y análisis histórico. Si te interesa implementarlo en tu embalse, contáctanos desde la página principal.',
+            description: 'Ya conoces lo esencial de QAwa: monitoreo en vivo, alertas, historial y mapa. El sistema también incluye gestión de usuarios, actividad de cuentas y clima local. Si te interesa implementarlo en tu embalse, contáctanos desde la página principal.',
             popoverClass: 'qawa-demo-popover qawa-demo-popover--overview qawa-demo-popover--completion',
             showButtons: ['previous', 'next'],
             nextBtnText: 'Terminar demo',

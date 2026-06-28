@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex"><title>QAwa Demo | Recorrido guiado del sistema</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css"><link rel="stylesheet" href="/_astro/demo.B5QsKBAk.css"></head><body class="demo-body">
+  <div class="demo-intro-slide is-visible" id="demo-intro-slide" aria-hidden="false"><div class="demo-intro-slide-card"><p class="demo-intro-eyebrow">Modo demostración</p><h1>Conoce QAwa en acción</h1><p class="demo-intro-text">Recorre el panel de monitoreo con datos simulados. Verás cómo se gestionan las boyas, las alertas y el historial del embalse — sin conexión a sensores reales.</p><p class="demo-intro-hint">Recorrido de <strong>8 pasos</strong>. Usa <strong>Siguiente</strong> o las flechas <strong>← →</strong> para avanzar.</p><button type="button" class="demo-btn-primary demo-intro-start-btn" id="demo-intro-start">Comenzar recorrido</button></div></div>
+
+  <a href="/" class="demo-back-btn" id="demo-back-btn">← Atrás</a>
+
+  <button type="button" class="demo-exit-btn" id="demo-exit-btn" hidden>Terminar demo</button>
+
+  <div class="demo-app" id="demo-app"><!-- PANTALLA: Login --><section class="demo-screen is-active" id="screen-login" data-screen="login"><div class="demo-login"><div class="demo-login-box" id="demo-welcome"><div class="demo-login-header"><h1>QAwa</h1><p>Sistema de Monitoreo de Agua</p></div><form class="demo-login-form" id="demo-login-form" onsubmit="return false;"><div class="demo-form-group"><label for="demo-email">Correo electrónico</label><input id="demo-email" type="email" value="admin@qawa.cl" readonly></div><div class="demo-form-group"><label for="demo-password">Contraseña</label><input id="demo-password" type="password" value="••••••••" readonly></div><button type="button" class="demo-btn-primary" id="demo-login-btn">Iniciar sesión</button></form><div class="demo-badge-demo">Modo demostración: los datos mostrados son simulados y no provienen de sensores reales.</div></div></div></section><!-- PANTALLA: Dispositivos --><section class="demo-screen" id="screen-devices" data-screen="devices"><header class="demo-devices-header"><div class="demo-devices-header-text"><h1 class="demo-header-title"> QAwa - Dispositivos Conectados</h1><p class="demo-header-subtitle">Selecciona un Arduino para ver las mediciones en tiempo real</p></div><div class="demo-view-controls" id="demo-view-controls"><button type="button" class="demo-view-btn is-active" title="Vista de cuadrícula" aria-label="Vista de cuadrícula"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z"></path></svg></button><button type="button" class="demo-view-btn" title="Vista de lista" aria-label="Vista de lista"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"></path></svg></button><button type="button" class="demo-view-btn demo-view-btn--map" id="demo-map-location-btn" title="Mapa de ubicación">📍 Mapa</button><button type="button" class="demo-btn demo-btn--admin" id="demo-admin-users-btn">Gestion de usuarios</button><button type="button" class="demo-btn demo-btn--admin" id="demo-admin-activity-btn">Actividad de cuentas</button><button type="button" class="demo-btn demo-btn--history" id="demo-devices-history-btn">Registro Histórico</button><button type="button" class="demo-btn demo-btn--logout">Cerrar Sesión</button></div></header><main class="demo-main"><div class="demo-admin-toolbar" id="demo-admin-toolbar"><button type="button" class="demo-btn">🔍 Detectar nuevos</button><button type="button" class="demo-btn" id="demo-add-manual-btn">➕ Agregar manual</button></div><div class="demo-modal-overlay" id="demo-add-device-modal" data-tour-panel aria-hidden="true"><div class="demo-modal" id="demo-add-device-form"><div class="demo-modal-header"><h2>Agregar nuevo dispositivo</h2></div><div class="demo-modal-body"><div class="demo-form-group"><label>Nombre del dispositivo *</label><input type="text" value="Boya Embalse Norte" readonly></div><div class="demo-form-group"><label>Tipo de microcontrolador</label><input type="text" value="ESP8266 (WiFi)" readonly></div><div class="demo-form-group"><label>Ubicación (opcional)</label><input type="text" value="Zona Norte — Embalse" readonly></div><div class="demo-form-group"><label>Identificador del dispositivo (opcional)</label><input type="text" value="Norte" readonly></div><div class="demo-form-group"><label>Clave de telemetría MQTT (opcional)</label><input type="text" value="Dispositivo 1" readonly></div><div class="demo-form-group"><label>Topic MQTT *</label><input type="text" value="boya/sensores/norte" readonly></div></div><div class="demo-modal-footer"><button type="button" class="demo-btn">Cancelar</button><button type="button" class="demo-btn demo-btn--history">Guardar dispositivo</button></div></div></div><section class="demo-location-map-panel" id="demo-location-map-panel" data-tour-panel aria-hidden="true"><h2>Mapa de ubicación — Embalse Arándanos</h2><p class="demo-map-panel-subtitle">Vista por zona con ubicación real de cada boya (puntos rojos).</p><div class="demo-real-map" id="demo-location-map-view"><div class="demo-real-map-bg" aria-hidden="true"></div><div class="demo-map-marker" style="top:28%;left:32%"><span></span><small>Boya Embalse Norte</small></div><div class="demo-map-marker" style="top:45%;left:58%"><span></span><small>Boya Canal de riego</small></div><div class="demo-map-marker is-warning" style="top:62%;left:41%"><span></span><small>Boya Profundidad 5 m</small></div><div class="demo-map-marker" style="top:38%;left:72%"><span></span><small>Boya Entrada de agua</small></div><div class="demo-map-zone-label" style="top:18%;left:24%">Zona Norte</div><div class="demo-map-zone-label" style="top:55%;left:52%">Zona Sur</div><div class="demo-map-zone-label" style="top:30%;left:68%">Zona Este</div></div></section><div class="demo-devices-grid" id="demo-devices-grid"><article class="demo-device-card is-highlighted" id="demo-device-card-1" data-device="1"><div class="demo-device-card-header"><div><h3>Boya Embalse Norte</h3><p>ESP8266 — Zona Norte, Embalse</p></div><span class="demo-status-badge">Conectado</span></div><div class="demo-sensor-row"><span>pH</span><strong>6.4 pH</strong></div><div class="demo-sensor-row"><span>Temperatura</span><strong>18.2 °C</strong></div><div class="demo-sensor-row"><span>Conductividad</span><strong>420 µS/cm</strong></div><div class="demo-device-card-footer"><p class="demo-last-update">Última actualización: hace 2 min</p><div class="demo-device-actions" id="demo-device-actions"><button type="button" class="demo-btn-edit">Modificar</button><button type="button" class="demo-btn-delete">Eliminar</button></div></div></article><article class="demo-device-card" id="demo-device-card-2"><div class="demo-device-card-header"><div><h3>Boya Profundidad 5 m</h3><p>Arduino — Zona Sur, Profundidad</p></div><span class="demo-status-badge">Conectado</span></div><div class="demo-sensor-row"><span>pH</span><strong>6.1 pH</strong></div><div class="demo-sensor-row"><span>Temperatura</span><strong>17.8 °C</strong></div><div class="demo-sensor-row"><span>Conductividad</span><strong>510 µS/cm</strong></div><div class="demo-device-card-footer"><p class="demo-last-update">Última actualización: hace 5 min</p><div class="demo-device-actions"><button type="button" class="demo-btn-edit">Modificar</button><button type="button" class="demo-btn-delete">Eliminar</button></div></div></article><article class="demo-device-card" id="demo-device-card-3"><div class="demo-device-card-header"><div><h3>Boya Canal de riego</h3><p>ESP8266 — Zona Norte, Canal</p></div><span class="demo-status-badge">Conectado</span></div><div class="demo-sensor-row"><span>pH</span><strong>6.5 pH</strong></div><div class="demo-sensor-row"><span>Temperatura</span><strong>19.0 °C</strong></div><div class="demo-sensor-row"><span>Conductividad</span><strong>380 µS/cm</strong></div><div class="demo-device-card-footer"><p class="demo-last-update">Última actualización: hace 1 min</p><div class="demo-device-actions"><button type="button" class="demo-btn-edit">Modificar</button><button type="button" class="demo-btn-delete">Eliminar</button></div></div></article></div></main></section><!-- PANTALLA: Actividad de cuentas --><section class="demo-screen" id="screen-activity" data-screen="activity"><header class="demo-header"><div class="demo-header-left"><button type="button" class="demo-back-btn" id="demo-back-from-activity" aria-label="Volver">←</button><div><h1 class="demo-header-title">Actividad de cuentas</h1><p class="demo-header-subtitle">Monitoreo de inicios de sesión (solo administradores)</p></div></div><div class="demo-header-actions"><button type="button" class="demo-btn demo-btn--admin is-active-nav">Actividad</button><button type="button" class="demo-btn demo-btn--logout">Cerrar sesión</button></div></header><main class="demo-main"><section class="demo-activity-section" id="demo-activity-section"><div class="demo-activity-header"><h2 class="demo-section-title">Seguimiento de actividad</h2><div class="demo-activity-controls"><label class="demo-activity-window">Ventana:<select readonly disabled><option selected>30 días</option></select></label><button type="button" class="demo-btn">↻ Actualizar</button></div></div><div class="demo-table-scroll"><table class="demo-table demo-activity-table"><thead><tr><th>Email</th><th>Último login</th><th>Rol (último)</th><th>Logins (total)</th><th>Logins (7d)</th><th>Fallidos (total)</th><th>Último fallido</th></tr></thead><tbody><tr><td>admin@qawa.cl</td><td>23/06/2026 14:20</td><td>admin</td><td>48</td><td>12</td><td>1</td><td>15/06/2026 09:10</td></tr><tr><td>operador@qawa.cl</td><td>22/06/2026 18:45</td><td>user</td><td>21</td><td>5</td><td>0</td><td>—</td></tr></tbody></table></div></section></main></section><!-- PANTALLA: Dashboard dispositivo --><section class="demo-screen" id="screen-dashboard" data-screen="dashboard"><header class="demo-header"><div class="demo-header-left"><button type="button" class="demo-back-btn" id="demo-back-devices" aria-label="Volver">←</button><div><h1 class="demo-header-title">Boya Embalse Norte</h1><p class="demo-header-subtitle">ESP8266 — Zona Norte, Embalse</p></div></div><div class="demo-header-actions"><span class="demo-btn" style="cursor:default;background:#e8f5e9;border-color:#a5d6a7;">⚙️ Datos simulados</span><button type="button" class="demo-btn demo-btn--admin" id="demo-alert-config-btn">Configuración rango alertas</button><button type="button" class="demo-btn demo-btn--icon" id="demo-dashboard-map-btn" title="Mapa de ubicación">📍 Mapa</button><button type="button" class="demo-btn demo-btn--history" id="demo-history-btn">Históricos</button><button type="button" class="demo-btn demo-btn--logout">Cerrar sesión</button></div></header><main class="demo-main"><section id="demo-info-section"><h2 class="demo-section-title">Información del sistema</h2><div class="demo-info-grid"><div class="demo-info-card"><div class="label">Sensores activos</div><div class="value">3/3</div></div><div class="demo-info-card"><div class="label">Última sincronización</div><div class="value">14:32 hoy</div></div><div class="demo-info-card"><div class="label">Conexión</div><div class="value" style="color:#2e7d32;">Conectado</div></div><div class="demo-info-card"><div class="label">Batería</div><div class="value">87%</div></div><div class="demo-info-card"><div class="label">Rol de usuario</div><div class="value">👨‍💼 Administrador</div></div></div></section><section id="demo-sensors-section"><h2 class="demo-section-title">Lecturas en tiempo real</h2><div class="demo-sensors-grid"><div class="demo-sensor-card"><div class="sensor-title"><h3>pH</h3><span class="demo-sensor-status">Normal</span></div><div class="demo-sensor-value">6.4 <span>pH</span></div></div><div class="demo-sensor-card"><div class="sensor-title"><h3>Temperatura</h3><span class="demo-sensor-status">Normal</span></div><div class="demo-sensor-value">18.2 <span>°C</span></div></div><div class="demo-sensor-card"><div class="sensor-title"><h3>Conductividad</h3><span class="demo-sensor-status">Normal</span></div><div class="demo-sensor-value">420 <span>µS/cm</span></div></div></div></section><section class="demo-weather-card" id="demo-weather-section"><h2 class="demo-section-title" style="margin-bottom:12px;">🌤️ Clima — Los Ángeles, Chile</h2><div class="demo-weather-main"><div><div class="demo-weather-temp">16.5°</div><p style="margin:0;color:#666;">Parcialmente nublado</p></div><div class="demo-weather-details"><div class="demo-weather-detail"><span class="wd-label">Sensación</span><span class="wd-value">15.2°C</span></div><div class="demo-weather-detail"><span class="wd-label">Humedad</span><span class="wd-value">72%</span></div><div class="demo-weather-detail"><span class="wd-label">Viento</span><span class="wd-value">2.4 m/s</span></div><div class="demo-weather-detail"><span class="wd-label">Presión</span><span class="wd-value">1018 hPa</span></div></div></div></section><section class="demo-alerts-section" id="demo-alerts-section"><h2>Alertas del día</h2><table class="demo-table"><thead><tr><th>Dispositivo</th><th>Valor</th><th>Tipo</th><th>pH</th><th>Temp.</th><th>Cond.</th><th>Hora</th><th>Telegram</th></tr></thead><tbody><tr class="alert-warning"><td>Boya Profundidad 5 m</td><td>Conductividad: 510</td><td>🟡 Advertencia</td><td>6.1</td><td>17.8°C</td><td>510</td><td>09:15</td><td>✅ Enviado</td></tr><tr><td>Boya Embalse Norte</td><td>pH: 6.4</td><td>🟢 Normal</td><td>6.4</td><td>18.2°C</td><td>420</td><td>11:40</td><td>—</td></tr></tbody></table></section><section class="demo-location-map-panel" id="demo-dashboard-location-map" data-tour-panel aria-hidden="true"><h2>Mapa de ubicación — Boya Embalse Norte</h2><p class="demo-map-panel-subtitle">Ubicación real de la boya seleccionada y otras del mismo sector (puntos rojos).</p><div class="demo-real-map"><div class="demo-real-map-bg" aria-hidden="true"></div><div class="demo-map-marker is-selected" style="top:28%;left:32%"><span></span><small>Boya Embalse Norte</small></div><div class="demo-map-marker" style="top:45%;left:58%"><span></span><small>Boya Canal de riego</small></div><div class="demo-map-zone-label" style="top:18%;left:24%">Zona Norte</div></div></section></main></section><!-- PANTALLA: Históricos --><section class="demo-screen" id="screen-historical" data-screen="historical"><header class="demo-history-header"><div class="demo-history-header-left"><button type="button" class="demo-back-btn" id="demo-back-devices-from-hist" aria-label="Volver">←</button><h1 class="demo-header-title">Datos Históricos</h1><span class="demo-source-badge demo-source-badge--simulated">⚙️ Datos simulados</span></div><button type="button" class="demo-btn demo-btn--history" id="demo-pdf-btn">Descargar PDF</button></header><main class="demo-history-content"><div class="demo-sensor-chart" id="demo-chart-ph"><div class="demo-chart-title"><h3>pH</h3><div class="demo-period-buttons"><button type="button" class="demo-period-btn is-active">1 hora</button><button type="button" class="demo-period-btn">1 día</button><button type="button" class="demo-period-btn">1 semana</button></div></div><div class="demo-chart-container" aria-hidden="true"><svg viewBox="0 0 300 120" preserveAspectRatio="none" class="demo-chart-svg"><polyline fill="none" stroke="#66bb6a" stroke-width="2.5" points="0,80 40,70 80,75 120,60 160,65 200,55 240,58 280,50 300,52"></polyline></svg></div><div class="demo-chart-stats"><span>Máx: 6.50</span><span>Mín: 6.10</span><span>Prom: 6.32</span></div></div><div class="demo-sensor-chart" id="demo-chart-temp"><div class="demo-chart-title"><h3>Temperatura (°C)</h3><div class="demo-period-buttons"><button type="button" class="demo-period-btn">1 hora</button><button type="button" class="demo-period-btn is-active">1 día</button><button type="button" class="demo-period-btn">1 semana</button></div></div><div class="demo-chart-container" aria-hidden="true"><svg viewBox="0 0 300 120" preserveAspectRatio="none" class="demo-chart-svg"><polyline fill="none" stroke="#66bb6a" stroke-width="2.5" points="0,70 50,65 100,68 150,60 200,62 250,58 300,55"></polyline></svg></div><div class="demo-chart-stats"><span>Máx: 19.20</span><span>Mín: 16.80</span><span>Prom: 18.05</span></div></div><div class="demo-sensor-chart" id="demo-chart-cond"><div class="demo-chart-title"><h3>Conductividad (µS/cm)</h3><div class="demo-period-buttons"><button type="button" class="demo-period-btn">1 hora</button><button type="button" class="demo-period-btn">1 día</button><button type="button" class="demo-period-btn is-active">1 semana</button></div></div><div class="demo-chart-container" aria-hidden="true"><svg viewBox="0 0 300 120" preserveAspectRatio="none" class="demo-chart-svg"><polyline fill="none" stroke="#66bb6a" stroke-width="2.5" points="0,60 45,55 90,58 135,50 180,52 225,48 270,45 300,47"></polyline></svg></div><div class="demo-chart-stats"><span>Máx: 520.00</span><span>Mín: 380.00</span><span>Prom: 445.50</span></div></div><section class="demo-hist-table-wrapper" id="demo-measurements-table"><div class="demo-hist-table-header"><h3>Mediciones En Tiempo Real</h3><span class="demo-hist-table-meta">Actualiza cada 30 segundos</span></div><div class="demo-hist-table-filters"><label class="demo-hist-filter-field"><span>Sensor</span><select disabled><option>Todos los sensores</option></select></label><label class="demo-hist-filter-field"><span>Fecha</span><select disabled><option>Todas las fechas</option></select></label></div><div class="demo-table-scroll"><table class="demo-measurements-table"><thead><tr><th>Dispositivo</th><th>Sensor</th><th>Medición</th><th>Fecha</th><th>Hora</th><th>Alerta</th></tr></thead><tbody><tr><td>Boya Embalse Norte</td><td>pH</td><td>6.4 pH</td><td>23/06/2026</td><td>14:32</td><td><span class="demo-alert-chip normal">Normal</span></td></tr><tr><td>Boya Embalse Norte</td><td>Temperatura (°C)</td><td>18.2 °C</td><td>23/06/2026</td><td>14:32</td><td><span class="demo-alert-chip normal">Normal</span></td></tr><tr><td>Boya Profundidad 5 m</td><td>Conductividad (µS/cm)</td><td>510 µS/cm</td><td>23/06/2026</td><td>09:15</td><td><span class="demo-alert-chip warning">Alerta</span></td></tr><tr><td>Boya Canal de riego</td><td>pH</td><td>6.5 pH</td><td>22/06/2026</td><td>11:05</td><td><span class="demo-alert-chip normal">Normal</span></td></tr></tbody></table></div></section></main></section></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script><script>
+    (function () {
+      const screens = {
+        login: document.getElementById('screen-login'),
+        devices: document.getElementById('screen-devices'),
+        activity: document.getElementById('screen-activity'),
+        dashboard: document.getElementById('screen-dashboard'),
+        historical: document.getElementById('screen-historical'),
+      };
+
+      function showScreen(name) {
+        Object.values(screens).forEach((el) => el?.classList.remove('is-active'));
+        screens[name]?.classList.add('is-active');
+        window.scrollTo(0, 0);
+      }
+
+      function hint(text) {
+        return '\n\n→ A continuación: ' + text;
+      }
+
+      const stepScreens = [
+        'login',
+        'devices',
+        'devices',
+        'dashboard',
+        'dashboard',
+        'historical',
+        'devices',
+        'devices',
+      ];
+
+      let driverObj = null;
+      let movingForward = true;
+      let overviewDelayTimer = null;
+
+      function finishDemo() {
+        if (driverObj) {
+          try {
+            driverObj.destroy();
+          } catch (_err) {
+            /* ignore */
+          }
+          driverObj = null;
+        }
+        unlockDemoInteraction();
+        window.location.href = '/';
+      }
+
+      function clearOverviewDelay() {
+        if (overviewDelayTimer) {
+          window.clearTimeout(overviewDelayTimer);
+          overviewDelayTimer = null;
+        }
+        const nextBtn = document.querySelector('.driver-popover-next-btn');
+        if (nextBtn) {
+          nextBtn.disabled = false;
+          nextBtn.style.opacity = '';
+        }
+      }
+
+      function applyStepEffects(step) {
+        clearOverviewDelay();
+        const overlay = document.querySelector('.driver-overlay');
+        const isCompletion = !!(step && step.isCompletion);
+        document.body.classList.toggle('demo-tour-completion', isCompletion);
+
+        if (overlay) {
+          overlay.style.opacity = isCompletion ? '0.72' : '';
+        }
+
+        if (!step || !step.isOverview || isCompletion) return;
+
+        const nextBtn = document.querySelector('.driver-popover-next-btn');
+        if (!nextBtn) return;
+        nextBtn.disabled = true;
+        nextBtn.style.opacity = '0.45';
+        overviewDelayTimer = window.setTimeout(function () {
+          nextBtn.disabled = false;
+          nextBtn.style.opacity = '';
+          overviewDelayTimer = null;
+        }, 1400);
+      }
+
+      function setTourPanels(step) {
+        document.querySelectorAll('[data-tour-panel]').forEach(function (el) {
+          el.classList.remove('is-tour-panel-visible');
+          el.setAttribute('aria-hidden', 'true');
+        });
+        const panelId = step && step.panelId;
+        if (!panelId) return;
+        const panel = document.getElementById(panelId);
+        if (panel) {
+          panel.classList.add('is-tour-panel-visible');
+          panel.setAttribute('aria-hidden', 'false');
+        }
+      }
+
+      function refreshHighlight(element) {
+        if (element && typeof element.scrollIntoView === 'function') {
+          element.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'instant' });
+        }
+        window.setTimeout(function () {
+          try {
+            driverObj?.refresh();
+          } catch (_err) {
+            /* ignore */
+          }
+        }, 100);
+      }
+
+      function transitionToStep(index, element) {
+        const screen = stepScreens[index];
+        if (!screen) return;
+        const prevScreen = index > 0 ? stepScreens[index - 1] : null;
+        const screenChanged = prevScreen !== screen;
+        showScreen(screen);
+        if (screenChanged || steps[index]?.isOverview) {
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () {
+              refreshHighlight(element);
+            });
+          });
+        }
+      }
+
+      const steps = [
+        {
+          isOverview: true,
+          popover: {
+            title: 'Inicio de sesión',
+            description: 'Cada usuario ingresa con correo y contraseña asignados por el administrador. Al iniciar sesión accedes al panel principal con todas las boyas y herramientas de gestión.' + hint('el panel de dispositivos'),
+            popoverClass: 'qawa-demo-popover qawa-demo-popover--overview',
+          },
+        },
+        {
+          isOverview: true,
+          popover: {
+            title: 'Panel de dispositivos',
+            description: 'Aquí ves todas las boyas conectadas con sus lecturas actuales (pH, temperatura, conductividad) y estado de conexión. También puedes agregar boyas, gestionar usuarios y abrir el registro histórico.' + hint('el detalle de una boya'),
+            popoverClass: 'qawa-demo-popover qawa-demo-popover--overview',
+          },
+        },
+        {
+          element: '#demo-device-card-1',
+          popover: {
+            title: 'Detalle de una boya',
+            description: 'Al seleccionar una boya entras a su vista completa: estado del equipo, lecturas en vivo, clima del sector y alertas del día.' + hint('las lecturas en tiempo real'),
+            side: 'right',
+          },
+        },
+        {
+          element: '#demo-sensors-section',
+          popover: {
+            title: 'Lecturas en tiempo real',
+            description: 'Los tres valores clave del agua — pH, temperatura y conductividad — se actualizan automáticamente. Los colores indican si están en rango normal o requieren atención.' + hint('las alertas automáticas'),
+            side: 'top',
+          },
+        },
+        {
+          element: '#demo-alerts-section',
+          popover: {
+            title: 'Alertas automáticas',
+            description: 'Cuando un valor sale del rango seguro, el sistema registra una alerta y puede notificarte por Telegram o correo. Los administradores pueden ajustar los umbrales desde «Configuración rango alertas».' + hint('los datos históricos'),
+            side: 'top',
+          },
+        },
+        {
+          isOverview: true,
+          popover: {
+            title: 'Datos históricos',
+            description: 'Consulta gráficos de tendencia por sensor (hora, día o semana), la tabla de mediciones filtrable y exporta informes en PDF. Ideal para análisis y reportes periódicos.' + hint('el mapa de ubicación'),
+            popoverClass: 'qawa-demo-popover qawa-demo-popover--overview',
+          },
+        },
+        {
+          element: '#demo-map-location-btn',
+          panelId: 'demo-location-map-panel',
+          popover: {
+            title: 'Mapa de ubicación',
+            description: 'Visualiza dónde está instalada cada boya en el embalse, agrupadas por sector (Norte, Sur, Este). Los puntos rojos marcan la ubicación de cada dispositivo.' + hint('cerrar el recorrido'),
+            side: 'bottom',
+            align: 'start',
+          },
+        },
+        {
+          isOverview: true,
+          isCompletion: true,
+          popover: {
+            title: '¡Recorrido completado!',
+            description: 'Ya conoces lo esencial de QAwa: monitoreo en vivo, alertas, historial y mapa. El sistema también incluye gestión de usuarios, actividad de cuentas y clima local. Si te interesa implementarlo en tu embalse, contáctanos desde la página principal.',
+            popoverClass: 'qawa-demo-popover qawa-demo-popover--overview qawa-demo-popover--completion',
+            showButtons: ['previous', 'next'],
+            nextBtnText: 'Terminar demo',
+            onNextClick: function () {
+              finishDemo();
+            },
+          },
+        },
+      ];
+
+      function lockDemoInteraction() {
+        document.body.classList.add('demo-tour-active');
+      }
+
+      function unlockDemoInteraction() {
+        document.body.classList.remove('demo-tour-active');
+      }
+
+      function handleTourKeys(event) {
+        if (!document.body.classList.contains('demo-tour-active')) return;
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }
+
+      document.addEventListener('keydown', handleTourKeys, true);
+
+      document.getElementById('demo-exit-btn')?.addEventListener('click', finishDemo);
+
+      function hideIntroSlide() {
+        const intro = document.getElementById('demo-intro-slide');
+        const exitBtn = document.getElementById('demo-exit-btn');
+        if (intro) {
+          intro.classList.remove('is-visible');
+          intro.setAttribute('aria-hidden', 'true');
+        }
+        exitBtn?.removeAttribute('hidden');
+      }
+
+      function startTour() {
+        if (!window.driver?.js?.driver) {
+          console.error('Driver.js no cargó correctamente');
+          return;
+        }
+
+        const driverFactory = window.driver.js.driver;
+        driverObj = driverFactory({
+          showProgress: true,
+          progressText: '{{current}} de {{total}}',
+          nextBtnText: 'Siguiente',
+          prevBtnText: 'Atrás',
+          doneBtnText: 'Terminar demo',
+          allowClose: false,
+          allowKeyboardControl: true,
+          smoothScroll: false,
+          disableActiveInteraction: true,
+          overlayOpacity: 0.65,
+          stagePadding: 8,
+          stageRadius: 8,
+          popoverClass: 'qawa-demo-popover',
+          onNextStarted: function () {
+            movingForward = true;
+            clearOverviewDelay();
+          },
+          onPrevStarted: function () {
+            movingForward = false;
+            clearOverviewDelay();
+          },
+          onHighlightStarted: function (element, step, { state }) {
+            const idx = state.activeIndex ?? 0;
+            setTourPanels(step);
+            transitionToStep(idx, element);
+          },
+          onHighlighted: function (element, step, { state }) {
+            const idx = state.activeIndex ?? 0;
+            const prevScreen = idx > 0 ? stepScreens[idx - 1] : null;
+            if (idx > 0 && prevScreen !== stepScreens[idx]) {
+              refreshHighlight(element);
+            } else {
+              window.setTimeout(function () {
+                try {
+                  driverObj?.refresh();
+                } catch (_err) {
+                  /* ignore */
+                }
+              }, 100);
+            }
+            applyStepEffects(step);
+          },
+          onDestroyed: function () {
+            clearOverviewDelay();
+            document.body.classList.remove('demo-tour-completion');
+            unlockDemoInteraction();
+            showScreen('login');
+          },
+          steps: steps,
+        });
+
+        showScreen('login');
+        lockDemoInteraction();
+        driverObj.drive();
+      }
+
+      function bindIntroStart() {
+        const startBtn = document.getElementById('demo-intro-start');
+        if (!startBtn) {
+          startTour();
+          return;
+        }
+        startBtn.addEventListener('click', function () {
+          hideIntroSlide();
+          startTour();
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindIntroStart);
+      } else {
+        bindIntroStart();
+      }
+    })();
+  </script></body></html>
